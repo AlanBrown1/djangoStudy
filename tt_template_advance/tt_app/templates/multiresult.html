@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>乘法的结果</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<p>9+7={{ multiresult }}</p>
+	<p>当前页面的网址是：{{ request.path }}</p>
+	<p>当前网址GET参数是：
+	{% if request.GET.urlencode == "" %}
+		没有GET参数，是空的
+	{% else %}
+		{{ request.GET.urlencode }}
+	{% endif %}
+	</p>
+	<p>当前网址加GET参数是：{{ request.path }}?{{request.GET.urlencode }}</p>
+	<p>在当前网址后面加参数page=1：{{ request.path }}?{{request.GET.urlencode }}&page=1</p>
+</body>
+</html>

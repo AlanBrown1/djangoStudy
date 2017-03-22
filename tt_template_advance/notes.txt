@@ -1,0 +1,1 @@
+这个tt_template_advance文件夹是我学习django模板进阶功能的记录，包括了django模板中的循环for，条件判断if elif elif else，常用的标签（for和if等功能都是标签），过滤器（{{var|length}}来获取变量长度）等等。

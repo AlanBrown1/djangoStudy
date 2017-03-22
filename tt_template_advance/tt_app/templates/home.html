@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>首页</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<div style="background: #99CCCC">
+	<p>当前用户是：{{ request.user }}</p>
+	<p>是否已经登录？=>> 
+		{% if request.user.is_authenticated %}
+			已经登录，{{ request.user.username }}，你好！
+		{% else %}
+			没有登录，请登录，这里放 <a href="{% url 'login' %}" target="_blank">登录链接</a>
+		{% endif %}
+		</p>
+</div>
+<div style="background:#99CCFF ">
+	<p>当前网页的网址是：{{ request.path }} ====>>>>>>（使用的是request.path）</p>
+	当前网页的网址是：{% url 'home' %} ====>>>>>> (使用的是url 'home'）
+</div>
+<div style="background: #FF9999">
+	{% url 'add' 9 7 as addurl %}
+	<!-- as addurl的作用是给该url起个别名，以便于多次使用 -->
+	<p><a href="{{ addurl }}"  target="_blank">计算9+7</a></p> 
+	上面加法的链接网址是：{{ addurl }}
+	<p><a href="/multi/?a=8&b=6"  target="_blank">计算8*6</a></p>
+	上面乘法的链接网址是：/multi/?a=8&b=6
+</div>
+<div style="background:#CCCCFF;">
+	<p>这里是首页，今天的年月日星期的信息如下：</p>
+	<p>{{ s }}</p>
+</div>
+<div style="background: #FF9966;">
+	姓名：
+	<ul>
+		{% for i in name %}
+			<li> {{ i }} </li>
+		{% endfor %}
+	</ul>
+	<!-- 通过管道符号构成的过滤器来获取变量长度 -->
+	<p>列表中姓名的个数是：{{ name|length }}</p>
+	<p>alan在不在name列表中？ ==>  
+		{% if 'alan' in name %}
+			在
+		{% else %}
+			不在
+		{% endif %}
+	</p>
+
+	个人信息：
+	姓名：{{ info.name}} 年龄：{{ info.age }} 学校：{{ info.school }}
+
+	<p>个人信息：</p>
+	<ul>
+		{% for k,v in info.items %}
+			<li> {{ k }} : {{ v }} </li>
+		{% endfor %}
+	</ul>
+	<p>个人信息的个数是：{{ info|length }}</p>
+</div>
+<div style="background: #99CC66;">
+	{% for i in li %}
+		{{ i }},
+	{% endfor %}
+	<p style="color: red;">分割线</p>
+	{% for i in li %}
+		{{ i }}{% if not forloop.last %},{% endif %}
+	{% endfor %}
+
+	<p>成绩是:{{ score }}，等级是：
+		{% if score >= 90 %}
+			优秀
+		{% elif score >= 80 %}
+			良好
+		{% elif score >= 70 %}
+			一般
+		{% elif score >= 60 %}
+			及格
+		{% else %}
+			不及格
+		{% endif %}
+	</p>
+</div>
+<div style="background: #CCCC33;">
+	当前GET参数：{{  request.GET.urlencode }}
+</div>
+</body>
+</html>
