@@ -1,0 +1,1 @@
+this repository comtains codes about my django learning.
