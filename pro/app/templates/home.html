@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>home</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="g:/pro/app/templates/home.css">
+	<style type="text/css">
+		p{
+			color: red;
+			font-size: 30px;
+		}
+		div{
+			background-color: green;
+			height: 200px;
+			width: 100px;
+		}
+	</style>
+</head>
+<body>
+<p>welcome to my home, you guys!</p>
+<div>this is a div</div>
+当前网址：{% url 'home' %}
+<a href="{% url 'multi' 1 5 3 %}">计算1*5*3</a>
+</body>
+</html>
