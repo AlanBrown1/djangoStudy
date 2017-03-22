@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}默认标题{% endblock title%}</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+{% block content %}
+	<div>这里是默认内容，所有继承base.html这个模板，如果不覆盖这个部分就默认显示本内容</div>
+{% endblock content %}
+
+</body>
+</html>

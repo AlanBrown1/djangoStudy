@@ -1,0 +1,1 @@
+这个tt_tempaltes文件夹是学习django模板和模板继承的东西。

@@ -1,0 +1,2 @@
+这个pro文件夹是学习django的url name的记录
+就是url(r'^$', app_views.home, name='home'),
