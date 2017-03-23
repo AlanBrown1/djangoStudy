@@ -1,0 +1,1 @@
+这个 learn_models 文件夹是学习django 数据库model的记录。包括创建对象，获取对象的方法。

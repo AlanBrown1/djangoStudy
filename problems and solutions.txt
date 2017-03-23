@@ -1,0 +1,8 @@
+1，在cmd使用from people.models import Person 时（people是项目名，Person是models.py里面的类），cmd报错：
+django.core.exceptions.ImproperlyConfigured: Requested setting DEFAULT_INDEX_TABLESPACE, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.
+解决办法：在models.py文件中加入这个：
+import os,django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project_name.settings")# project_name 项目名称
+django.setup()
+
+*************************************************************************************************************
