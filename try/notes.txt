@@ -1,0 +1,3 @@
+this "try" folder is my pactice based on tt_template_advance.
+
+	--Alan Brown, 2017.3.23
