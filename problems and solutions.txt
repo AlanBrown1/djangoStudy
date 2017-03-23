@@ -5,4 +5,9 @@ import os,django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project_name.settings")# project_name 项目名称
 django.setup()
 
+注意事项：
+1，应该在python manage.py makemigrations和python manage.py migrate这两句执行之后再把上面的添加到models.py里面，否则makemigrations和migrate这两句话会执行不成功！
+2，使用from people.models import Person导入完了之后，记得把那个添加的语句注释掉，不然python manage.py createsuperuser和python manage.py runserver执行不了！
+3，总之就是，需要在cmd里面import models里面的类的时候就加上，import过后就注释掉！！！被坑了好多次才摸索出这个规律！！！
+
 *************************************************************************************************************
