@@ -1,0 +1,1 @@
+这个tt_admin_practice是对django后台管理的再次练习，但是增加了前端的显示，也就是：有了MVC，model（数据库），view（逻辑和前端页面），和controler （后台管理）。

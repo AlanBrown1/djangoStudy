@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title%}这是个模板{% endblock title %}</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+{% block content %}
+	<p>如果继承者没有重写这个部分，那么你就会看到现在这句话。</p>
+{% endblock content %}
+</body>
+</html>

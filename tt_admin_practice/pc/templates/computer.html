@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}电脑{% endblock title %}
+
+{% block content %}
+	<ol>
+		{% for i in li %}
+			<li>名称：{{ i.name }}，主人：{{ i.master }}，品牌：{{ i.brand }}，价格：{{ i.price }}</li>
+		{% endfor %}
+	</ol>
+	<table border="2" cellpadding="0" cellspacing="0">
+		<th>名称</th>
+		<th>主人</th>
+		<th>品牌</th>
+		<th>价格</th>
+		{% for i in li %}
+			<tr>
+				<td>{{i.name}}</td>
+				<td>{{i.master}}</td>
+				<td>{{i.brand}}</td>
+				<td>{{i.price}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+{% endblock content %}
