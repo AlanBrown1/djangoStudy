@@ -1,0 +1,1 @@
+这个tt_form文件夹是学习django 表单的记录。如果是GET时，表单的值都存在request里面，如果是POST时,在app里面添加了forms.py来定义类，django封装好了表单。
