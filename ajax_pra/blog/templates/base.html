@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}这是默认标题{% endblock title %}</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+{% block content %}
+	<p>如果没有重写这个部分，那么就会显示这句话。</p>
+	
+{% endblock content %}
+</body>
+</html>

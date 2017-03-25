@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	首页
+{% endblock title %}
+
+{% block content %}
+	<p>请输入两个数值型数据：</p>
+	<form>
+		A: <input id="a" type="text" name="a"></input>
+		B: <input id="b" type="text" name="b"></input>
+		<p>A + B = <span id="result" style="color: red "></span></p>
+		<button type="button" id="sum">计算</button>
+	</form>
+
+	<button type="button" id="list_bn">显示列表</button>
+	<p id="list"></p>
+	<button type="button" id="dict_bn">显示字典</button>
+	<p id="dict"></p>
+
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		// 加法 add
+		$('#sum').click(function(){
+			var a = $('#a').val();
+			var b = $('#b').val();
+			$.get('/add/', {'a':a, 'b':b}, function(res){
+				$('#result').html(res);
+			})
+		});
+
+		// 列表 list
+		list_flag = 0;
+		$('#list_bn').click(function(){
+			if (list_flag == 0){
+				$.getJSON('/ajax_list/', function(res){
+					for (var i = 0; i <= res.length; i++){
+						if (i < res.length){
+							$('#list').append(i+',');	
+						}else{
+							$('#list').append(i);
+						}
+					}
+				})
+				list_flag = 1;
+			}
+		});
+
+		// 字典 dict
+		dict_flag = 0;
+		$('#dict_bn').click(function(){
+			if (dict_flag == 0){
+				$.getJSON('/ajax_dict/', function(res){
+					$.each(res, function(key, value){
+						$('#dict').append(key+':'+value+'<br>');
+					});
+				});
+				dict_flag = 1;
+			}
+		});
+
+
+
+	});
+
+</script>
+
+
+{% endblock content %}

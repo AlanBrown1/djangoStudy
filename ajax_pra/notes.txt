@@ -1,0 +1,1 @@
+这个ajax_pra是学习了django ajax之后的练习。
