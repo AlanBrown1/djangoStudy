@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}默认标题{% endblock title %}</title>
+	<meta charset="utf-8" />
+	{% block script %}
+		在这里添加脚本
+	{% endblock script %}
+</head>
+<body>
+{% block content %}
+	<p>如果没有重写这个部分，将会显示显示现在这句话</p>
+{% endblock content %}
+</body>
+</html>
