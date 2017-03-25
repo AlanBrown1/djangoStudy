@@ -2,3 +2,19 @@
 方法是：首先把源数据放在项目路径下，然后在项目路径下创建py文件，用来获取数据并导入数据库。
 使用bulk_create进行批量导入要比create快，因为前者只执行一条SQL语句，后者每个create都会执行一个SQL。
 使用get_or_create可以在创建前检查是否存在，不存在就创建，但是效率和create差不多。
+
+
+一，简单的数据导出与导入（简单的迁移）
+1. django 项目提供了一个导出的方法 python manage.py dumpdata, 不指定 appname 时默认为导出所有的app
+python manage.py dumpdata [appname] > appname_data.json
+比如我们有一个项目叫 mysite, 里面有一个 app 叫 blog ,我们想导出 blog 的所有数据
+python manage.py dumpdata blog > blog_dump.json
+2. 数据导入,不需要指定 appname
+python manage.py loaddata blog_dump.json
+3.一些常用的
+python manage.py dumpdata auth > auth.json # 导出用户数据
+优点：可以兼容各种支持的数据库，也就是说，以前用的是 SQLite3，可以导出后，用这种方法导入到 MySQL, PostgreSQL等数据库，反过来也可以。
+缺点：数据量大的时候，速度相对较慢，表的关系比较复杂的时候可以导入不成功。
+
+二、用数据库自己的方法进行导入导出
+比如mysql可以用sql文件来导入导出
