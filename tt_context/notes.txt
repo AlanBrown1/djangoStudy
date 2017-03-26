@@ -1,0 +1,50 @@
+tt_context这个文件夹是学习django上下文渲染器的记录。
+上下文渲染器能使某个变量在多个模板之间共用。
+
+**********************************************************************************************
+使用步骤：
+1，新建项目tt_context然后cd到tt_project
+2，新建app，blog
+3，在settings中的installed_apps里面添加blog。
+4，在与settings.py同目录下创建一个context_processor.py（名称无所谓，不一定非要是这个名字）
+5，在context_processor.py里面
+   from django.conf import settings as original_settings
+   def settings(request):
+      return {'settings': original_settings}
+
+   def ip_address(request):
+      return {'ip_address': request.META['REMOTE_ADDR']}
+
+   def book(request):
+      return {'what':'there are some books.'}
+
+6，在settings.py里面的TEMPLATES的context_processors里面添加上面函数的函数名：
+   'tt_context.context_processors.settings',
+   'tt_context.context_processors.ip_address',
+   'tt_context.context_processors.book',
+
+7，在app的views.py里面
+   from django.shortcuts import render
+   def index(reuqest):
+       return render(reuqest, 'blog/index.html')
+ 
+   def columns(request):
+       return render(request, 'blog/columns.html')
+
+8，在urls.py里面添加views.py里面的两个函数的访问路径
+   from django.conf.urls import url
+   from django.contrib import admin
+   from blog import views as blog_views
+
+   urlpatterns = [
+	url(r'^blog_home/$', blog_views.index),
+	url(r'^blog_columns/$', blog_views.columns),
+        url(r'^admin/', admin.site.urls),
+]
+
+9，在app目录中新建templates文件夹，在里面再新建一个blog文件夹（即和app名称相同）
+10，在刚建好的blog文件夹里面新建index.html和columns.html
+    可以在里面引用settings.py里面的东西比如{{ settings.DEBUG }}，或者使用{{ ip_address }}或者使用{{ what }}
+    来引用context_processors里面函数返回的变量。项目中所有模板都可以引用这些变量。
+11，运行开发服务器python manage.py runserver
+12，打开urls.py里面定义的网址即可访问到
