@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	首页
+{% endblock title %}
+
+{% block content %}
+<p>请输入用户名和密码：</p>
+<form>
+{% csrf_token %}
+用户名：<input id="username" type="text" name="username"></input>
+密  码：<input id="pwd" type="text" name="pwd"></input>
+<p id="login_res" style="color: red; display: inline;"></p>
+<br />
+<button id="login_bn" type="button">登录</button>
+</form>
+
+<p>请输入两个数值型数据：</p>
+<form>
+	a: <input id="a" type="text" name="a"></input>
+	b: <input id="b" type="text" name="b"></input>
+	<p>a + b = <span id="result"></span></p>
+	<button id="calc" type="button">计算</button>
+</form>
+<br />
+<button id="show_list">显示列表</button>
+<p id="list"></p>
+<br />
+<button id="show_dict">显示字典</button>
+<p id="dict"></p>
+
+
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		// 注意，下面这个函数是为了防治csrf跨站请求伪造（跨站攻击）的
+		// 需要在模板中使用（可以是继承或被继承的模板），不能放在.js文件中
+		// 需要在使用jquery的ajax或post之前加入它
+		// 加了之后就可以和原来一样使用jQuery.ajax()和jQuery.post()了
+		// 本示例没有用到上面两个函数，所以这里下面这个函数没什么用
+		$.ajaxSetup({
+			data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+		});
+
+		// *****************************************************************
+		$('#login_bn').click(function(){
+			name = $('#username').val();
+			pwd = $('#pwd').val();
+			$.get('/login/', {'username':name, 'pwd':pwd}, function(res){
+				$('#login_res').html(res)
+			});
+		});
+
+
+		$('#calc').click(function(){
+			var a = $('#a').val();
+			var b = $('#b').val();
+			$.get('/add/', {'a':a, 'b':b}, function(res){
+				$('#result').html(res)
+			});
+		});
+
+		$('#show_list').click(function(){
+			$.getJSON('/ajax_list/', function(res){
+				$('#list').html(res);
+			});
+		});
+
+		$('#show_dict').click(function(){
+			$.getJSON('/ajax_dict/', function(res){
+				$('#dict').html('姓名:'+res.name+'<br>'+'年龄：'+res.age);
+			});
+		});
+
+
+	});
+
+	
+
+
+</script>
+
+
+{% endblock content %}
