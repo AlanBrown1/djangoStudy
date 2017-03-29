@@ -1,0 +1,1 @@
+这个tt_mysql文件夹是在django中使用mysql数据库的简单练习，包括怎么在settings里面设置，在app的models.py里面创建表，然后makemigrations和migrate到mysql数据库，并使用一个.py文件插入一些数据。
