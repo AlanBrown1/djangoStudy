@@ -11,3 +11,21 @@ django.setup()
 3，总之就是，需要在cmd里面import models里面的类的时候就加上，import过后就注释掉！！！被坑了好多次才摸索出这个规律！！！
 
 *************************************************************************************************************
+
+2，在项目中使用mysql数据库的方法。详见网址：http://blog.csdn.net/u014359108/article/details/52298960
+ （1）在cmd使用pip install PyMySQL安装pymysql
+ （2）在项目的settings.py中，的DATABASES里面，改成这样:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'django',    #你的数据库名称
+        'USER': 'root',   #你的数据库用户名
+        'PASSWORD': '', #你的数据库密码
+        'HOST': '', #你的数据库主机，留空默认为localhost
+        'PORT': '3306', #你的数据库端口
+    }
+}
+
+3，python3.5目前不支持mysqlDb，因此前面安装的是PyMysql，但是django默认使用的是mysqlDb，所以需要在app的__init__.py文件中加入：
+import pymysql 
+pymysql.install_as_MySQLdb()
