@@ -26,6 +26,26 @@ DATABASES = {
     }
 }
 
+*************************************************************************************************************
+
 3，python3.5目前不支持mysqlDb，因此前面安装的是PyMysql，但是django默认使用的是mysqlDb，所以需要在app的__init__.py文件中加入：
 import pymysql 
 pymysql.install_as_MySQLdb()
+
+*************************************************************************************************************
+4，上传并显示图片的方法
+   ①在项目的settings.py里面，最后加上：
+	MEDIA_URL = '/media/'
+	MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+   ②在项目的urls.py里面添加引用
+	from django.conf import settings
+	from django.conf.urls.static import static
+	然后改urlpatterns：
+	urlpatterns = [
+		..........
+	] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+	
+   ③在app的models.py里面定义表的字段时，比如定义Book表的bookimg字段时：
+	bookimg = models.ImageField('封面', upload_to='bookimg')
+   ④在插入Book表的记录时，在模板中上传图片，在views.py里面获取图片并给bookimg字段赋值，然后保存该记录。即可在数据库中保存该图标的相对路径。django会自动在项目根目录中创建/media/bookimg文件夹，并把图片放入该文件夹中。
+   ⑤可以使用object.bookimg获取该图片，或使用object.bookimg.url获取该图片的路径 
